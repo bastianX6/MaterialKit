@@ -9,46 +9,46 @@
 import UIKit
 
 public class MKLabel: UILabel {
-    @IBInspectable public var maskEnabled: Bool = true {
+    public var maskEnabled: Bool = true {
         didSet {
             mkLayer.enableMask(maskEnabled)
         }
     }
-    @IBInspectable public var rippleLocation: MKRippleLocation = .TapLocation {
+    public var rippleLocation: MKRippleLocation = .TapLocation {
         didSet {
             mkLayer.rippleLocation = rippleLocation
         }
     }
-    @IBInspectable public var rippleAniDuration: Float = 0.75
-    @IBInspectable public var backgroundAniDuration: Float = 1.0
-    @IBInspectable public var rippleAniTimingFunction: MKTimingFunction = .Linear
-    @IBInspectable public var backgroundAniTimingFunction: MKTimingFunction = .Linear
-    @IBInspectable public var backgroundAniEnabled: Bool = true {
+    public var rippleAniDuration: Float = 0.75
+    public var backgroundAniDuration: Float = 1.0
+    public var rippleAniTimingFunction: MKTimingFunction = .Linear
+    public var backgroundAniTimingFunction: MKTimingFunction = .Linear
+    public var backgroundAniEnabled: Bool = true {
         didSet {
             if !backgroundAniEnabled {
                 mkLayer.enableOnlyCircleLayer()
             }
         }
     }
-    @IBInspectable public var ripplePercent: Float = 0.9 {
+    public var ripplePercent: Float = 0.9 {
         didSet {
             mkLayer.ripplePercent = ripplePercent
         }
     }
 
-    @IBInspectable public var cornerRadius: CGFloat = 2.5 {
+    public var cornerRadius: CGFloat = 2.5 {
         didSet {
             layer.cornerRadius = cornerRadius
             mkLayer.setMaskLayerCornerRadius(cornerRadius)
         }
     }
     // color
-    @IBInspectable public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
+    public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
         didSet {
             mkLayer.setCircleLayerColor(rippleLayerColor)
         }
     }
-    @IBInspectable public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
+    public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
         didSet {
             mkLayer.setBackgroundLayerColor(backgroundLayerColor)
         }

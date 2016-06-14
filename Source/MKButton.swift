@@ -8,59 +8,59 @@
 
 import UIKit
 
-@IBDesignable
+
 public class MKButton : UIButton
 {
-    @IBInspectable public var maskEnabled: Bool = true {
+    public var maskEnabled: Bool = true {
         didSet {
             mkLayer.enableMask(maskEnabled)
         }
     }
-    @IBInspectable public var rippleLocation: MKRippleLocation = .TapLocation {
+    public var rippleLocation: MKRippleLocation = .TapLocation {
         didSet {
             mkLayer.rippleLocation = rippleLocation
         }
     }
-    @IBInspectable public var ripplePercent: Float = 0.9 {
+    public var ripplePercent: Float = 0.9 {
         didSet {
             mkLayer.ripplePercent = ripplePercent
         }
     }
-    @IBInspectable public var backgroundLayerCornerRadius: CGFloat = 0.0 {
+    public var backgroundLayerCornerRadius: CGFloat = 0.0 {
         didSet {
             mkLayer.setBackgroundLayerCornerRadius(backgroundLayerCornerRadius)
         }
     }
     // animations
-    @IBInspectable public var shadowAniEnabled: Bool = true
-    @IBInspectable public var backgroundAniEnabled: Bool = true {
+    public var shadowAniEnabled: Bool = true
+    public var backgroundAniEnabled: Bool = true {
         didSet {
             if !backgroundAniEnabled {
                 mkLayer.enableOnlyCircleLayer()
             }
         }
     }
-    @IBInspectable public var rippleAniDuration: Float = 0.75
-    @IBInspectable public var backgroundAniDuration: Float = 1.0
-    @IBInspectable public var shadowAniDuration: Float = 0.65
+    public var rippleAniDuration: Float = 0.75
+    public var backgroundAniDuration: Float = 1.0
+    public var shadowAniDuration: Float = 0.65
     
-    @IBInspectable public var rippleAniTimingFunction: MKTimingFunction = .Linear
-    @IBInspectable public var backgroundAniTimingFunction: MKTimingFunction = .Linear
-    @IBInspectable public var shadowAniTimingFunction: MKTimingFunction = .EaseOut
+    public var rippleAniTimingFunction: MKTimingFunction = .Linear
+    public var backgroundAniTimingFunction: MKTimingFunction = .Linear
+    public var shadowAniTimingFunction: MKTimingFunction = .EaseOut
 
-    @IBInspectable public var cornerRadius: CGFloat = 2.5 {
+    public var cornerRadius: CGFloat = 2.5 {
         didSet {
             layer.cornerRadius = cornerRadius
             mkLayer.setMaskLayerCornerRadius(cornerRadius)
         }
     }
     // color
-    @IBInspectable public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
+    public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
         didSet {
             mkLayer.setCircleLayerColor(rippleLayerColor)
         }
     }
-    @IBInspectable public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
+    public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
         didSet {
             mkLayer.setBackgroundLayerColor(backgroundLayerColor)
         }

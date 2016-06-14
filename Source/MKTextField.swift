@@ -9,54 +9,53 @@
 import UIKit
 import QuartzCore
 
-@IBDesignable
 public class MKTextField : UITextField {
-    @IBInspectable public var padding: CGSize = CGSize(width: 5, height: 5)
-    @IBInspectable public var floatingLabelBottomMargin: CGFloat = 2.0
-    @IBInspectable public var floatingPlaceholderEnabled: Bool = false
+    public var padding: CGSize = CGSize(width: 5, height: 5)
+    public var floatingLabelBottomMargin: CGFloat = 2.0
+    public var floatingPlaceholderEnabled: Bool = false
 
-    @IBInspectable public var rippleLocation: MKRippleLocation = .TapLocation {
+    public var rippleLocation: MKRippleLocation = .TapLocation {
         didSet {
             mkLayer.rippleLocation = rippleLocation
         }
     }
 
-    @IBInspectable public var rippleAniDuration: Float = 0.75
-    @IBInspectable public var backgroundAniDuration: Float = 1.0
-    @IBInspectable public var shadowAniEnabled: Bool = true
-    @IBInspectable public var rippleAniTimingFunction: MKTimingFunction = .Linear
+    public var rippleAniDuration: Float = 0.75
+    public var backgroundAniDuration: Float = 1.0
+    public var shadowAniEnabled: Bool = true
+    public var rippleAniTimingFunction: MKTimingFunction = .Linear
     
-    @IBInspectable public var cornerRadius: CGFloat = 2.5 {
+    public var cornerRadius: CGFloat = 2.5 {
         didSet {
             layer.cornerRadius = cornerRadius
             mkLayer.setMaskLayerCornerRadius(cornerRadius)
         }
     }
     // color
-    @IBInspectable public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
+    public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
         didSet {
             mkLayer.setCircleLayerColor(rippleLayerColor)
         }
     }
-    @IBInspectable public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
+    public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
         didSet {
             mkLayer.setBackgroundLayerColor(backgroundLayerColor)
         }
     }
 
     // floating label
-    @IBInspectable public var floatingLabelFont: UIFont = UIFont.boldSystemFontOfSize(10.0) {
+    public var floatingLabelFont: UIFont = UIFont.boldSystemFontOfSize(10.0) {
         didSet {
             floatingLabel.font = floatingLabelFont
         }
     }
-    @IBInspectable public var floatingLabelTextColor: UIColor = UIColor.lightGrayColor() {
+    public var floatingLabelTextColor: UIColor = UIColor.lightGrayColor() {
         didSet {
             floatingLabel.textColor = floatingLabelTextColor
         }
     }
 
-    @IBInspectable public var bottomBorderEnabled: Bool = true {
+    public var bottomBorderEnabled: Bool = true {
         didSet {
             bottomBorderLayer?.removeFromSuperlayer()
             bottomBorderLayer = nil
@@ -68,9 +67,9 @@ public class MKTextField : UITextField {
             }
         }
     }
-    @IBInspectable public var bottomBorderWidth: CGFloat = 1.0
-    @IBInspectable public var bottomBorderColor: UIColor = UIColor.lightGrayColor()
-    @IBInspectable public var bottomBorderHighlightWidth: CGFloat = 1.75
+    public var bottomBorderWidth: CGFloat = 1.0
+    public var bottomBorderColor: UIColor = UIColor.lightGrayColor()
+    public var bottomBorderHighlightWidth: CGFloat = 1.75
 
     override public var placeholder: String? {
         didSet {
