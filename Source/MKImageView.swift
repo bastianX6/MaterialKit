@@ -8,58 +8,58 @@
 
 import UIKit
 
-public class MKImageView: UIImageView
+open class MKImageView: UIImageView
 {
-    public var maskEnabled: Bool = true {
+    open var maskEnabled: Bool = true {
         didSet {
             mkLayer.enableMask(maskEnabled)
         }
     }
-    public var rippleLocation: MKRippleLocation = .TapLocation {
+    open var rippleLocation: MKRippleLocation = .tapLocation {
         didSet {
             mkLayer.rippleLocation = rippleLocation
         }
     }
-    public var rippleAniDuration: Float = 0.75
-    public var backgroundAniDuration: Float = 1.0
-    public var rippleAniTimingFunction: MKTimingFunction = .Linear
-    public var backgroundAniTimingFunction: MKTimingFunction = .Linear
-    public var backgroundAniEnabled: Bool = true {
+    open var rippleAniDuration: Float = 0.75
+    open var backgroundAniDuration: Float = 1.0
+    open var rippleAniTimingFunction: MKTimingFunction = .linear
+    open var backgroundAniTimingFunction: MKTimingFunction = .linear
+    open var backgroundAniEnabled: Bool = true {
         didSet {
             if !backgroundAniEnabled {
                 mkLayer.enableOnlyCircleLayer()
             }
         }
     }
-    public var ripplePercent: Float = 0.9 {
+    open var ripplePercent: Float = 0.9 {
         didSet {
             mkLayer.ripplePercent = ripplePercent
         }
     }
 
-    public var cornerRadius: CGFloat = 2.5 {
+    open var cornerRadius: CGFloat = 2.5 {
         didSet {
             layer.cornerRadius = cornerRadius
             mkLayer.setMaskLayerCornerRadius(cornerRadius)
         }
     }
     // color
-    public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
+    open var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
         didSet {
             mkLayer.setCircleLayerColor(rippleLayerColor)
         }
     }
-    public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
+    open var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
         didSet {
             mkLayer.setBackgroundLayerColor(backgroundLayerColor)
         }
     }
-    override public var bounds: CGRect {
+    override open var bounds: CGRect {
         didSet {
             mkLayer.superLayerDidResize()
         }
     }
-    private lazy var mkLayer: MKLayer = MKLayer(superLayer: self.layer)
+    fileprivate lazy var mkLayer: MKLayer = MKLayer(superLayer: self.layer)
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -81,27 +81,27 @@ public class MKImageView: UIImageView
         setup()
     }
 
-    private func setup() {
+    fileprivate func setup() {
         mkLayer.setCircleLayerColor(rippleLayerColor)
         mkLayer.setBackgroundLayerColor(backgroundLayerColor)
         mkLayer.setMaskLayerCornerRadius(cornerRadius)
     }
 
-    public func animateRipple(location: CGPoint? = nil) {
+    open func animateRipple(_ location: CGPoint? = nil) {
         if let point = location {
             mkLayer.didChangeTapLocation(point)
-        } else if rippleLocation == .TapLocation {
-            rippleLocation = .Center
+        } else if rippleLocation == .tapLocation {
+            rippleLocation = .center
         }
 
         mkLayer.animateScaleForCircleLayer(0.65, toScale: 1.0, timingFunction: rippleAniTimingFunction, duration: CFTimeInterval(self.rippleAniDuration))
         mkLayer.animateAlphaForBackgroundLayer(backgroundAniTimingFunction, duration: CFTimeInterval(self.backgroundAniDuration))
     }
 
-    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         if let firstTouch = touches.first {
-            let location = firstTouch.locationInView(self)
+            let location = firstTouch.location(in: self)
             animateRipple(location)
         }
     }

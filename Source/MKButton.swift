@@ -9,69 +9,69 @@
 import UIKit
 
 
-public class MKButton : UIButton
+open class MKButton : UIButton
 {
-    public var maskEnabled: Bool = true {
+    open var maskEnabled: Bool = true {
         didSet {
             mkLayer.enableMask(maskEnabled)
         }
     }
-    public var rippleLocation: MKRippleLocation = .TapLocation {
+    open var rippleLocation: MKRippleLocation = .tapLocation {
         didSet {
             mkLayer.rippleLocation = rippleLocation
         }
     }
-    public var ripplePercent: Float = 0.9 {
+    open var ripplePercent: Float = 0.9 {
         didSet {
             mkLayer.ripplePercent = ripplePercent
         }
     }
-    public var backgroundLayerCornerRadius: CGFloat = 0.0 {
+    open var backgroundLayerCornerRadius: CGFloat = 0.0 {
         didSet {
             mkLayer.setBackgroundLayerCornerRadius(backgroundLayerCornerRadius)
         }
     }
     // animations
-    public var shadowAniEnabled: Bool = true
-    public var backgroundAniEnabled: Bool = true {
+    open var shadowAniEnabled: Bool = true
+    open var backgroundAniEnabled: Bool = true {
         didSet {
             if !backgroundAniEnabled {
                 mkLayer.enableOnlyCircleLayer()
             }
         }
     }
-    public var rippleAniDuration: Float = 0.75
-    public var backgroundAniDuration: Float = 1.0
-    public var shadowAniDuration: Float = 0.65
+    open var rippleAniDuration: Float = 0.75
+    open var backgroundAniDuration: Float = 1.0
+    open var shadowAniDuration: Float = 0.65
     
-    public var rippleAniTimingFunction: MKTimingFunction = .Linear
-    public var backgroundAniTimingFunction: MKTimingFunction = .Linear
-    public var shadowAniTimingFunction: MKTimingFunction = .EaseOut
+    open var rippleAniTimingFunction: MKTimingFunction = .linear
+    open var backgroundAniTimingFunction: MKTimingFunction = .linear
+    open var shadowAniTimingFunction: MKTimingFunction = .easeOut
 
-    public var cornerRadius: CGFloat = 2.5 {
+    open var cornerRadius: CGFloat = 2.5 {
         didSet {
             layer.cornerRadius = cornerRadius
             mkLayer.setMaskLayerCornerRadius(cornerRadius)
         }
     }
     // color
-    public var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
+    open var rippleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
         didSet {
             mkLayer.setCircleLayerColor(rippleLayerColor)
         }
     }
-    public var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
+    open var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
         didSet {
             mkLayer.setBackgroundLayerColor(backgroundLayerColor)
         }
     }
-    override public var bounds: CGRect {
+    override open var bounds: CGRect {
         didSet {
             mkLayer.superLayerDidResize()
         }
     }
 
-    private lazy var mkLayer: MKLayer = MKLayer(superLayer: self.layer)
+    fileprivate lazy var mkLayer: MKLayer = MKLayer(superLayer: self.layer)
 
     // MARK - initilization
     override public init(frame: CGRect) {
@@ -85,7 +85,7 @@ public class MKButton : UIButton
     }
 
     // MARK - setup methods
-    private func setupLayer() {
+    fileprivate func setupLayer() {
         adjustsImageWhenHighlighted = false
         cornerRadius = 2.5
         mkLayer.setBackgroundLayerColor(backgroundLayerColor)
@@ -93,9 +93,9 @@ public class MKButton : UIButton
     }
 
     // MARK - location tracking methods
-    override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        if rippleLocation == .TapLocation {
-            mkLayer.didChangeTapLocation(touch.locationInView(self))
+    override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        if rippleLocation == .tapLocation {
+            mkLayer.didChangeTapLocation(touch.location(in: self))
         }
 
         // rippleLayer animation
@@ -114,6 +114,6 @@ public class MKButton : UIButton
             mkLayer.animateSuperLayerShadow(10, toRadius: shadowRadius, fromOpacity: 0, toOpacity: shadowOpacity, timingFunction: shadowAniTimingFunction, duration: duration)
         }
 
-        return super.beginTrackingWithTouch(touch, withEvent: event)
+        return super.beginTracking(touch, with: event)
     }
 }
